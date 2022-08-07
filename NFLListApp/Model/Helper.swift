@@ -12,15 +12,17 @@
         https://www.hackingwithswift.com/example-code/uicolor/how-to-convert-a-hex-color-to-a-uicolor
         https://geocode.maps.co/
 */
-
+import Foundation
 import SwiftUI
-import MapKit
 
-@main
-struct NFLListApp: App {
-    var body: some Scene {
-        WindowGroup {
-            TeamListView(teamList: allTeams)
-        }
-    }
+func hexToRgbColor(hex: String) -> [String:Double] {
+    let scanner = Scanner(string: hex)
+    var hexNumber: UInt64 = 0
+    scanner.scanHexInt64(&hexNumber)
+    
+    let r = Double((hexNumber & 0xff0000) >> 16) / 255
+    let g = Double((hexNumber & 0x00ff00) >> 8) / 255
+    let b = Double((hexNumber & 0x0000ff)) / 255
+    
+    return ["red": r,"green": g,"blue": b]
 }
